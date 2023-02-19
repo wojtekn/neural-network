@@ -6,31 +6,14 @@ namespace NeuralNetwork;
 
 use NeuralNetwork\ActivationFunctions\ActivationFunction;
 
-/**
- * Class WorkingNeuron
- *
- * @package NeuralNetwork
- */
 class WorkingNeuron extends Neuron
 {
-    /**
-     * @var array
-     */
     private $connections = [];
 
-    /**
-     * @var ActivationFunction
-     */
-    private $activationFunction;
+    public function __construct(
+		private ActivationFunction $activationFunction
+    )  { }
 
-    public function __construct(ActivationFunction $activationFunction)
-    {
-        $this->activationFunction = $activationFunction;
-    }
-
-    /**
-     * @return float
-     */
     public function getValue(): float
     {
         $sum = 0;
@@ -44,11 +27,8 @@ class WorkingNeuron extends Neuron
         return $this->activationFunction->activation($sum);
     }
 
-    /**
-     * @param Connection $c
-     */
-    public function addConnection(Connection $c)
+    public function addConnection(Connection $connection)
     {
-        $this->connections[] = $c;
+        $this->connections[] = $connection;
     }
 }

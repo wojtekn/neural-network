@@ -50,7 +50,6 @@ class NeuralNetworkTest extends TestCase
         $this->assertEquals(1, $o1->getValue());
     }
 
-
     public function testSigmoidActivationFunction()
     {
         $nn = new NeuralNetwork();
@@ -99,15 +98,12 @@ class NeuralNetworkTest extends TestCase
         $this->assertEquals(0, $o1->getValue());
     }
 
-    /**
-     * @expectedException \RuntimeException
-     */
     public function testSingleLayerPerceptronException()
     {
         $nn = new NeuralNetwork();
 
-        $nn->createFullMesh(0, 0, 0, 0);
+	    $this->expectException(\RuntimeException::class);
 
-        $this->expectException(\RuntimeException::class);
+        $nn->createFullMesh(0, 0, 0, 0);
     }
 }

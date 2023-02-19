@@ -6,46 +6,23 @@ namespace NeuralNetwork;
 
 use NeuralNetwork\ActivationFunctions\ActivationFunction;
 
-/**
- * Class NeuralNetwork
- *
- * @package NeuralNetwork
- */
 class NeuralNetwork
 {
-    /**
-     * @var array
-     */
-    private $inputNeurons = [];
+    private array $inputNeurons = [];
 
-    /**
-     * @var array
-     */
-    private $outputNeurons = [];
+    private array $outputNeurons = [];
 
-    /**
-     * @param ActivationFunction $activationFunction
-     * @return WorkingNeuron
-     */
     public function createNewOutput(ActivationFunction $activationFunction): WorkingNeuron
     {
         return $this->outputNeurons[] = new WorkingNeuron($activationFunction);
     }
 
-    /**
-     * @return InputNeuron
-     */
     public function createNewInput(): InputNeuron
     {
         return $this->inputNeurons[] = new InputNeuron();
     }
 
-    /**
-     * @param \float[] ...$weights
-     * @throws \RuntimeException
-     * @return void
-     */
-    public function createFullMesh(float ...$weights)
+    public function createFullMesh(float ...$weights): void
     {
         if (count($weights) != (count($this->inputNeurons) * count($this->outputNeurons)))
         {
