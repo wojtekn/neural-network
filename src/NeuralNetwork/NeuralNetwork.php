@@ -12,6 +12,8 @@ class NeuralNetwork
 
     private array $outputNeurons = [];
 
+	private array $weights = [];
+
 	public function __construct($inputNumber)
 	{
 		for ($i = 0; $i < $inputNumber; $i++) {
@@ -34,7 +36,7 @@ class NeuralNetwork
         return $this->inputNeurons[] = new InputNeuron();
     }
 
-    public function setWeights(float ...$weights): void
+    public function connectWeights(float ...$weights): void
     {
         if (count($weights) != (count($this->inputNeurons) * count($this->outputNeurons)))
         {
@@ -63,26 +65,31 @@ class NeuralNetwork
         }
     }
 
-	public function train(
-		$trainingSetInputs, $trainingSetOutputs, $times = 1000
-	) {
+	public function initializeWeights($trainingSetInputs)
+	{
 		// Generate initial random weights
 		$weights = [];
 		for ($i = 1; $i <= count($trainingSetInputs[0]); $i++) {
 			// random value between -1 and 1
 			$weights[] = 2 * (mt_rand() / mt_getrandmax()) - 1;
 		}
+		$this->weights = $weights;
+	}
 
-		echo 'Initial Weights:';
-		var_export($weights);
-		echo "\n";
+	public function getWeights(): array
+	{
+		return $this->weights;
+	}
 
+	public function train(
+		$trainingSetInputs, $trainingSetOutputs, $times = 1000
+	) {
 		for ($i = 0; $i < $times; $i++) {
 			$errors = [];
 
 			// Pass the training set through our neural network (a single neuron).
 			foreach ($trainingSetInputs as $setKey => $trainingSetInput) {
-				$this->setWeights(...$weights);
+				$this->connectWeights(...$this->weights);
 
 				// Set inputs from given training set
 				foreach ($trainingSetInput as $inputKey => $input) {
@@ -114,14 +121,9 @@ class NeuralNetwork
 			}
 
 			// Adjust the weights by adding each weight adjustment to each one.
-			foreach (array_keys($adjustments + $weights) as $key) {
-				$weights[$key] = $adjustments[$key] + $weights[$key];
+			foreach (array_keys($adjustments + $this->weights) as $key) {
+				$this->weights[$key] = $adjustments[$key] + $this->weights[$key];
 			}
 		}
-
-		echo 'Trained Weights: ';
-		var_export($weights);
-
-		return $weights;
 	}
 }

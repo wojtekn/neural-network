@@ -16,94 +16,77 @@ class NeuralNetworkTest extends TestCase
 {
     public function testIdentityActivationFunction()
     {
-        $nn = new NeuralNetwork();
+        $nn = new NeuralNetwork(4);
 
-        $i1 = $nn->createNewInput();
-        $i2 = $nn->createNewInput();
-        $i3 = $nn->createNewInput();
-        $i4 = $nn->createNewInput();
-
-        $i1->setValue(1);
-        $i2->setValue(2);
-        $i3->setValue(3);
-        $i4->setValue(4);
+	    $nn->setInputValue(0, 1);
+	    $nn->setInputValue(1, 2);
+	    $nn->setInputValue(2, 3);
+	    $nn->setInputValue(3, 4);
 
         $o1 = $nn->createNewOutput(new Identity());
-        $nn->setWeights(0, 0, 0, 0);
+        $nn->connectWeights(0, 0, 0, 0);
 
         $this->assertEquals(0, $o1->getValue());
     }
 
     public function testBinaryActivationFunction()
     {
-        $nn = new NeuralNetwork();
+        $nn = new NeuralNetwork(2);
 
-        $i1 = $nn->createNewInput();
-        $i1->setValue(1);
-
-        $i2 = $nn->createNewInput();
-        $i2->setValue(2);
+        $nn->setInputValue(0, 1);
+        $nn->setInputValue(1, 2);
 
         $o1 = $nn->createNewOutput(new Binary());
-        $nn->setWeights(0, 0);
+        $nn->connectWeights(0, 0);
 
         $this->assertEquals(1, $o1->getValue());
     }
 
     public function testSigmoidActivationFunction()
     {
-        $nn = new NeuralNetwork();
+        $nn = new NeuralNetwork(2);
 
-        $i1 = $nn->createNewInput();
-        $i1->setValue(1);
-
-        $i2 = $nn->createNewInput();
-        $i2->setValue(2);
+        $nn->setInputValue(0, 1);
+        $nn->setInputValue(1, 2);
 
         $o1 = $nn->createNewOutput(new Sigmoid());
-        $nn->setWeights(0, 0);
+        $nn->connectWeights(0, 0);
 
         $this->assertEquals(.5, $o1->getValue());
     }
 
     public function testHyperbolicTangentActivationFunction()
     {
-        $nn = new NeuralNetwork();
+        $nn = new NeuralNetwork(2);
 
-        $i1 = $nn->createNewInput();
-        $i1->setValue(1);
-
-        $i2 = $nn->createNewInput();
-        $i2->setValue(2);
+        $nn->setInputValue(0, 1);
+        $nn->setInputValue(1, 2);
 
         $o1 = $nn->createNewOutput(new HyperbolicTangent());
-        $nn->setWeights(0, 0);
+        $nn->connectWeights(0, 0);
 
         $this->assertEquals(0, $o1->getValue());
     }
 
     public function testReLuActivationFunction()
     {
-        $nn = new NeuralNetwork();
+        $nn = new NeuralNetwork(2);
 
-        $i1 = $nn->createNewInput();
-        $i1->setValue(1);
-
-        $i2 = $nn->createNewInput();
-        $i2->setValue(2);
+        $nn->setInputValue(0, 1);
+        $nn->setInputValue(0, 2);
 
         $o1 = $nn->createNewOutput(new ReLu());
-        $nn->setWeights(0, 0);
+        $nn->connectWeights(0, 0);
 
         $this->assertEquals(0, $o1->getValue());
     }
 
     public function testSingleLayerPerceptronException()
     {
-        $nn = new NeuralNetwork();
+        $nn = new NeuralNetwork(0);
 
 	    $this->expectException(\RuntimeException::class);
 
-        $nn->setWeights(0, 0, 0, 0);
+        $nn->connectWeights(0, 0, 0, 0);
     }
 }

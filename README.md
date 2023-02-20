@@ -37,7 +37,7 @@ $i4->setValue(4);
 $o1 = $nn->createNewOutput(new Identity());
  
 // Sets the weights and connect each input to the output neuron
-$nn->setWeights(0, 0, 0, 0);
+$nn->connectWeights(0, 0, 0, 0);
  
 echo $o1->getValue(); // Output 0
 ```
