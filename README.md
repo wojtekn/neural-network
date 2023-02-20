@@ -18,21 +18,15 @@ $ composer require patrickschur/neural-network
 ## Examples
 Creating a simple single-layer perceptron network with four inputs and one output neuron.
 ```php
-// Creates the neural network
-$nn = new NeuralNetwork();
- 
-// Creates four input neurons
-$i1 = $nn->createNewInput();
-$i2 = $nn->createNewInput();
-$i3 = $nn->createNewInput();
-$i4 = $nn->createNewInput();
- 
+// Creates the neural network with four input neurons
+$nn = new NeuralNetwork(4);
+
 // Sets the input for each input neuron
-$i1->setValue(1);
-$i2->setValue(2);
-$i3->setValue(3);
-$i4->setValue(4);
- 
+$nn->setInputValue(0, 1);
+$nn->setInputValue(1, 2);
+$nn->setInputValue(2, 3);
+$nn->setInputValue(3, 4);
+
 // Creates the output neuron
 $o1 = $nn->createNewOutput(new Identity());
  
@@ -42,6 +36,12 @@ $nn->connectWeights(0, 0, 0, 0);
 echo $o1->getValue(); // Output 0
 ```
 ![Screenshot](screenshots/singlelayer.png)
+
+## Run examples
+
+```php
+php examples/ExampleLogicalOperations.php
+```
 
 ## Contribute
 Feel free to contribute. Any help is welcome.
