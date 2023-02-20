@@ -8,6 +8,8 @@
 A dead simple neural network. For educational purposes only. Ported from Java into PHP.
 Originally written in Java from [Brotcrunsher](https://youtube.com/brotcrunsher) a German youtuber who makes tutorials about computer science.
 
+It's worked from https://github.com/patrickschur/neural-network, slightly refactored, and added sample training based on https://medium.com/technology-invention-and-more/how-to-build-a-simple-neural-network-in-9-lines-of-python-code-cc8f23647ca1.
+
 > **Note**: The project is still under construction and can change at any time
 
 ## Installation
