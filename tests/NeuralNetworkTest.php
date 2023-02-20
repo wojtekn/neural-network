@@ -29,7 +29,7 @@ class NeuralNetworkTest extends TestCase
         $i4->setValue(4);
 
         $o1 = $nn->createNewOutput(new Identity());
-        $nn->createFullMesh(0, 0, 0, 0);
+        $nn->setWeights(0, 0, 0, 0);
 
         $this->assertEquals(0, $o1->getValue());
     }
@@ -45,7 +45,7 @@ class NeuralNetworkTest extends TestCase
         $i2->setValue(2);
 
         $o1 = $nn->createNewOutput(new Binary());
-        $nn->createFullMesh(0, 0);
+        $nn->setWeights(0, 0);
 
         $this->assertEquals(1, $o1->getValue());
     }
@@ -61,7 +61,7 @@ class NeuralNetworkTest extends TestCase
         $i2->setValue(2);
 
         $o1 = $nn->createNewOutput(new Sigmoid());
-        $nn->createFullMesh(0, 0);
+        $nn->setWeights(0, 0);
 
         $this->assertEquals(.5, $o1->getValue());
     }
@@ -77,7 +77,7 @@ class NeuralNetworkTest extends TestCase
         $i2->setValue(2);
 
         $o1 = $nn->createNewOutput(new HyperbolicTangent());
-        $nn->createFullMesh(0, 0);
+        $nn->setWeights(0, 0);
 
         $this->assertEquals(0, $o1->getValue());
     }
@@ -93,7 +93,7 @@ class NeuralNetworkTest extends TestCase
         $i2->setValue(2);
 
         $o1 = $nn->createNewOutput(new ReLu());
-        $nn->createFullMesh(0, 0);
+        $nn->setWeights(0, 0);
 
         $this->assertEquals(0, $o1->getValue());
     }
@@ -104,6 +104,6 @@ class NeuralNetworkTest extends TestCase
 
 	    $this->expectException(\RuntimeException::class);
 
-        $nn->createFullMesh(0, 0, 0, 0);
+        $nn->setWeights(0, 0, 0, 0);
     }
 }

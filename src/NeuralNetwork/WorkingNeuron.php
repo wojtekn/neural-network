@@ -31,4 +31,9 @@ class WorkingNeuron extends Neuron
     {
         $this->connections[] = $connection;
     }
+
+	public function resetConnections()
+	{
+		$this->connections = [];
+	}
 }
